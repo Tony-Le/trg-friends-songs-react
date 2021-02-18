@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Grid,
-  InputBase,
   IconButton,
   TextField,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
-import { useHistory } from "react-router-dom";
-const queryString = require("query-string");
 
 function SongSearchBar(props) {
 

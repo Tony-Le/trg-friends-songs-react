@@ -11,7 +11,7 @@ import {
   Toolbar,
 } from "@material-ui/core";
 import Slide from "@material-ui/core/Slide";
-import SongSearchBar from "./SongSearchField";
+import SongSearchField from "./SongSearchField";
 import SongCard from "./SongCard";
 import { useHistory, useLocation } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -163,10 +163,10 @@ function SongSearch(props) {
         <Toolbar>
           <Container>
             <Grid container justify="center">
-              <SongSearchBar
+              <SongSearchField
                 onSubmit={onSubmit}
                 defaultValue={query}
-              ></SongSearchBar>
+              ></SongSearchField>
             </Grid>
           </Container>
         </Toolbar>

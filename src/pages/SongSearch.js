@@ -6,19 +6,32 @@ import {
   CircularProgress,
   Dialog,
   DialogContent,
+  Backdrop,
+  AppBar,
+  Toolbar,
 } from "@material-ui/core";
 import Slide from "@material-ui/core/Slide";
-import SongSearchBar from "./SongSearchBar";
+import SongSearchBar from "./SongSearchField";
 import SongCard from "./SongCard";
 import { useHistory, useLocation } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import YouTube from "react-youtube";
+import { makeStyles } from "@material-ui/core/styles";
 const queryString = require("query-string");
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+const useStyles = makeStyles((theme) => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
+  },
+}));
+
 function SongSearch(props) {
+  const classes = useStyles();
+
   const songPageLength = 15;
   const [query, setQuery] = useState([]);
   const [songs, setSongs] = useState([]);
@@ -27,6 +40,7 @@ function SongSearch(props) {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [openVideoDialog, setOpenVideoDialog] = useState(false);
   const [playerRef, setPlayerRef] = useState(null);
+  const [openBackDrop, setOpenBackDrop] = React.useState(false);
   const history = useHistory();
   const location = useLocation();
   
@@ -37,6 +51,7 @@ function SongSearch(props) {
   }, [location]);
 
   useEffect(() => {
+    setOpenBackDrop(true);
     const url =
       "https://trg-friends-songs-api.herokuapp.com/songs/api/search?query=";
     setPageNumber(0);
@@ -50,11 +65,20 @@ function SongSearch(props) {
       })
       .then((response) => response.json())
       .then((data) => {
-        setSongs(data._embedded.songList);
-        setMoreSongs(data._embedded.songList.length >= songPageLength);
+         if (data._embedded) {
+           if (data._embedded.songList.length > 0) {
+             setSongs(data._embedded.songList);
+             setMoreSongs(data._embedded.songList.length >= songPageLength);
+           }
+         } else {
+           // no songs found
+           setSongs([]);
+         }
+        setOpenBackDrop(false);
       })
       .catch(function (error) {
         console.log("Request failed", error);
+        setOpenBackDrop(false);
       });
   }, [query]);
 
@@ -120,7 +144,7 @@ function SongSearch(props) {
 
   const songsRender = songs.map((song) => {
     return (
-      <Grid item sm={4}>
+      <Grid item md={4} sm={6}>
         <SongCard key={song.id} song={song} onClick={onClickSongCard} />
       </Grid>
     );
@@ -135,7 +159,19 @@ function SongSearch(props) {
 
   return (
     <Container>
-      <SongSearchBar onSubmit={onSubmit} defaultValue={query}></SongSearchBar>
+      <AppBar position="fixed">
+        <Toolbar>
+          <Container>
+            <Grid container justify="center">
+              <SongSearchBar
+                onSubmit={onSubmit}
+                defaultValue={query}
+              ></SongSearchBar>
+            </Grid>
+          </Container>
+        </Toolbar>
+      </AppBar>
+      <Toolbar />
       <InfiniteScroll
         dataLength={songs.length}
         next={loadMoreSongs}
@@ -148,6 +184,9 @@ function SongSearch(props) {
         }
       >
         <Grid container spacing={3}>
+          <Backdrop className={classes.backdrop} open={openBackDrop}>
+            <CircularProgress color="inherit" />
+          </Backdrop>
           {songsRender}
         </Grid>
       </InfiniteScroll>
@@ -159,11 +198,7 @@ function SongSearch(props) {
         onClose={handleClose}
       >
         <DialogContent>
-          <YouTube
-            videoId={selectedVideo}
-            opts={opts}
-            onReady={_onReady}
-          />
+          <YouTube videoId={selectedVideo} opts={opts} onReady={_onReady} />
         </DialogContent>
       </Dialog>
     </Container>

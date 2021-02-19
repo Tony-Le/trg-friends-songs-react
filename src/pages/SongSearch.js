@@ -165,7 +165,7 @@ function SongSearch(props) {
             <Grid container justify="center">
               <SongSearchField
                 onSubmit={onSubmit}
-                defaultValue={query}
+                defaultValue={queryString.parse(window.location.search).query}
               ></SongSearchField>
             </Grid>
           </Container>

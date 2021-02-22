@@ -13,7 +13,7 @@ import {
 import Slide from "@material-ui/core/Slide";
 import SongSearchField from "./SongSearchField";
 import SongCard from "./SongCard";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation, Link } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import YouTube from "react-youtube";
 import { makeStyles } from "@material-ui/core/styles";
@@ -162,11 +162,28 @@ function SongSearch(props) {
       <AppBar position="fixed">
         <Toolbar>
           <Container>
-            <Grid container justify="center">
-              <SongSearchField
-                onSubmit={onSubmit}
-                defaultValue={queryString.parse(window.location.search).query}
-              ></SongSearchField>
+            <Grid container justify="space-between">
+              <Grid xs={3}>
+                <Link to="/home">
+                  <img
+                    src="/TRG Logo.jpg"
+                    alt="The Runaway Guys Logo"
+                    height="40px"
+                  ></img>
+                  <img
+                    src="/developed-with-youtube-sentence-case-light.png"
+                    alt="The Runaway Guys Logo"
+                    height="40px"
+                  ></img>
+                </Link>
+              </Grid>
+              <Grid container justify="center" xs={6}>
+                <SongSearchField
+                  onSubmit={onSubmit}
+                  defaultValue={queryString.parse(window.location.search).query}
+                ></SongSearchField>
+              </Grid>
+              <Grid xs={3}></Grid>
             </Grid>
           </Container>
         </Toolbar>

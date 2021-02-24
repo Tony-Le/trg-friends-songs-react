@@ -33,7 +33,12 @@ function SongSearchBar(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    props.onSubmit(value);
+    if (value) {
+      props.onSubmit(value);
+    }
+    else {
+      props.onSubmit(props.defaultValue);
+    }
   }
 
   return (

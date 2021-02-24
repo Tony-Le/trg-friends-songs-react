@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from "react";
 import {
   Grid,
-  Container,
-  TextField,
   CircularProgress,
   Dialog,
   DialogContent,
   Backdrop,
-  AppBar,
-  Toolbar,
 } from "@material-ui/core";
 import Slide from "@material-ui/core/Slide";
-import SongSearchField from "./SongSearchField";
 import SongCard from "./SongCard";
 import { useHistory, useLocation, Link } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -28,6 +23,8 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
   },
 }));
+
+// Control the song search based on url query search parameter which then puts it into the the search field.
 
 function SongSearch(props) {
   const classes = useStyles();
@@ -158,37 +155,7 @@ function SongSearch(props) {
   };
 
   return (
-    <Container>
-      <AppBar position="fixed">
-        <Toolbar>
-          <Container>
-            <Grid container justify="space-between">
-              <Grid xs={3}>
-                <Link to="/home">
-                  <img
-                    src="/TRG Logo.jpg"
-                    alt="The Runaway Guys Logo"
-                    height="40px"
-                  ></img>
-                  <img
-                    src="/developed-with-youtube-sentence-case-light.png"
-                    alt="The Runaway Guys Logo"
-                    height="40px"
-                  ></img>
-                </Link>
-              </Grid>
-              <Grid container justify="center" xs={6}>
-                <SongSearchField
-                  onSubmit={onSubmit}
-                  defaultValue={queryString.parse(window.location.search).query}
-                ></SongSearchField>
-              </Grid>
-              <Grid xs={3}></Grid>
-            </Grid>
-          </Container>
-        </Toolbar>
-      </AppBar>
-      <Toolbar />
+    <div>
       <InfiniteScroll
         dataLength={songs.length}
         next={loadMoreSongs}
@@ -218,7 +185,7 @@ function SongSearch(props) {
           <YouTube videoId={selectedVideo} opts={opts} onReady={_onReady} />
         </DialogContent>
       </Dialog>
-    </Container>
+    </div>
   );
 }
 

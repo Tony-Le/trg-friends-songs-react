@@ -7,10 +7,12 @@ import {
 } from "@material-ui/core";
 import Home from "./pages/Home";
 import SongSearch from "./pages/SongSearch";
+import NavBar from "./pages/NavBar";
 
 function App() {
   return (
     <BrowserRouter>
+      <NavBar/>
       <Container>
         <Switch>
           <Route path="/search">

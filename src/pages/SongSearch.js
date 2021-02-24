@@ -163,7 +163,7 @@ function SongSearch(props) {
         loader={<div>Loading...</div>}
         endMessage={
           <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
+            <b>No more results</b>
           </p>
         }
       >

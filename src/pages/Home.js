@@ -5,6 +5,7 @@ import { Grid } from "@material-ui/core";
 
 import SongSearchField from "./SongSearchField";
 
+
 function Home(props) {
   const history = useHistory();
 
@@ -18,12 +19,6 @@ function Home(props) {
         console.log("Request failed", error);
       });
   }, []);
-
-  function onSubmit(value) {
-    if (value) {
-      history.push("/search?query=" + value);
-    }
-  }
 
   return (
     <div>
@@ -50,9 +45,8 @@ function Home(props) {
       </p>
       <p>
         If you do not know what to search for try searching<span> </span>"
-        <Link to="/search?query=pollyanna jazz">pollyanna jazz</Link>"
+        <a href="/search?query=pollyanna jazz">pollyanna jazz</a>"
       </p>
-      <SongSearchField onSubmit={onSubmit} />
       <div>
         *Note: The first search will take a minute or so to load as the back-end
         server will require some time to wake up.

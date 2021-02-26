@@ -7,7 +7,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     alignItems: "center",
-    width: 400,
+    width: 500,
+    maxHeight: "3em",
   },
   input: {
     marginLeft: theme.spacing(1),
@@ -19,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
   divider: {
     height: 28,
     margin: 4,
+  },
+  maxHeight: {
+    maxHeight: "4em",
   },
 }));
 

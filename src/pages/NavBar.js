@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   Grid,
   Container,
-  TextField,
-  CircularProgress,
-  Dialog,
-  DialogContent,
-  Backdrop,
+  Paper,
   AppBar,
   Toolbar,
 } from "@material-ui/core";
@@ -32,16 +28,16 @@ function NavBar(props) {
               <Grid container justify="space-between">
                 <Grid item xs={3}>
                   <Link to="/home">
-                    <img
-                      src="/TRG Logo.jpg"
-                      alt="The Runaway Guys Logo"
-                      height="40px"
-                    ></img>
-                    <img
-                      src="/developed-with-youtube-sentence-case-light.png"
-                      alt="The Runaway Guys Logo"
-                      height="40px"
-                    ></img>
+                      <img
+                        src="/TRG Logo.jpg"
+                        alt="The Runaway Guys Logo"
+                        height="40px"
+                      ></img>
+                      <img
+                        src="/developed-with-youtube-sentence-case-light.png"
+                        alt="The Runaway Guys Logo"
+                        height="40px"
+                      ></img>
                   </Link>
                 </Grid>
                 <Grid container item justify="center" xs={6}>

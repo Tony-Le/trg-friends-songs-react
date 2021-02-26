@@ -1,27 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { Grid } from "@material-ui/core";
 
-import SongSearchField from "./SongSearchField";
+import SongRecents from "./SongRecents";
 
 
 function Home(props) {
   const history = useHistory();
 
-  useEffect(() => {
-    //Call an empty search to try and wake up server early
-    const url =
-      "https://trg-friends-songs-api.herokuapp.com/songs/api/search?query=";
-    fetch(url)
-      .then((response) => {})
-      .catch(function (error) {
-        console.log("Request failed", error);
-      });
-  }, []);
-
   return (
     <div>
+      <h2>About</h2>
       <Grid container justify="center">
         <img
           src="/TRG Logo.jpg"
@@ -51,6 +40,8 @@ function Home(props) {
         *Note: The first search will take a minute or so to load as the back-end
         server will require some time to wake up.
       </div>
+      <h2>Recent Videos</h2>
+      <SongRecents/>
     </div>
   );
 }

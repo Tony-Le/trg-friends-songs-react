@@ -12,7 +12,7 @@ function SongSearch(props) {
       <CardActionArea onClick={onClick}>
         <CardMedia
           component="img"
-          image={"https://i.ytimg.com/vi/" + props.song.id + "/hqdefault.jpg"}
+          image={"https://i.ytimg.com/vi/" + props.song.id + "/mqdefault.jpg"}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">

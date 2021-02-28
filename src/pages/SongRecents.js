@@ -2,18 +2,10 @@ import React, { useEffect, useState } from "react";
 import {
   Grid,
   CircularProgress,
-  Dialog,
-  DialogContent,
 } from "@material-ui/core";
-import Slide from "@material-ui/core/Slide";
 import SongCard from "./SongCard";
 import InfiniteScroll from "react-infinite-scroll-component";
-import YouTube from "react-youtube";
-import { makeStyles } from "@material-ui/core/styles";
-const queryString = require("query-string");
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+import VideoDialog from "./VideoDialog";
 
 function SongSearch(props) {
 
@@ -125,9 +117,7 @@ function SongSearch(props) {
 
   return (
     <div>
-      {
-        loading ? <CircularProgress /> : <span></span>
-      }
+      {loading ? <CircularProgress /> : <span></span>}
       <InfiniteScroll
         dataLength={songs.length}
         next={loadMoreSongs}
@@ -143,7 +133,13 @@ function SongSearch(props) {
           {songsRender}
         </Grid>
       </InfiniteScroll>
-      <Dialog
+      <VideoDialog
+        open={openVideoDialog}
+        onClose={handleClose}
+        videoId={selectedVideo}
+        onReady={_onReady}
+      />
+      {/* <Dialog
         open={openVideoDialog}
         maxWidth="xl"
         TransitionComponent={Transition}
@@ -153,7 +149,7 @@ function SongSearch(props) {
         <DialogContent>
           <YouTube videoId={selectedVideo} opts={opts} onReady={_onReady} />
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
     </div>
   );
 }

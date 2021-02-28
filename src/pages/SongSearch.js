@@ -2,25 +2,31 @@ import React, { useEffect, useState } from "react";
 import {
   Grid,
   CircularProgress,
-  Dialog,
-  DialogContent,
   Backdrop,
 } from "@material-ui/core";
 import Slide from "@material-ui/core/Slide";
 import SongCard from "./SongCard";
 import { useHistory, useLocation, Link } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
-import YouTube from "react-youtube";
+import VideoDialog from "./VideoDialog";
 import { makeStyles } from "@material-ui/core/styles";
 const queryString = require("query-string");
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
     color: "#fff",
+  },
+  fluidVideo: {
+    position: "absolute",
+    top: "0",
+    left: "0",
+    width: "100%",
+    height: "100%",
+  },
+  fluidVideoContainer: {
+    width: "1080px",
+    paddingTop: "56.25%", /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
   },
 }));
 
@@ -174,17 +180,12 @@ function SongSearch(props) {
           {songsRender}
         </Grid>
       </InfiniteScroll>
-      <Dialog
+      <VideoDialog
         open={openVideoDialog}
-        maxWidth="xl"
-        TransitionComponent={Transition}
-        keepMounted
         onClose={handleClose}
-      >
-        <DialogContent>
-          <YouTube videoId={selectedVideo} opts={opts} onReady={_onReady} />
-        </DialogContent>
-      </Dialog>
+        videoId={selectedVideo}
+        onReady={_onReady}
+      />
     </div>
   );
 }

@@ -40,8 +40,12 @@ function Home(props) {
         *Note: The first search will take a minute or so to load as the back-end
         server will require some time to wake up.
       </div>
+      <p>
+        View this project on{" "}
+        <a href="https://github.com/Tony-Le/trg-friends-songs-react">Github</a>.
+      </p>
       <h2>Recent Videos</h2>
-      <SongRecents/>
+      <SongRecents />
     </div>
   );
 }

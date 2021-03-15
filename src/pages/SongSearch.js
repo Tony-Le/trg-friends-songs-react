@@ -94,27 +94,27 @@ function SongSearch(props) {
       query +
       "&pageNumber=" +
       newPageNumber;
-    fetch(url)
-      .then((response) => {
-        if (response.status >= 200 && response.status < 300) {
-          return Promise.resolve(response);
-        } else {
-          return Promise.reject(new Error(response.statusText));
-        }
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data._embedded) {
-          if (data._embedded.songList.length > 0) {
-            setSongs(songs.concat(data._embedded.songList));
+      fetch(url)
+        .then((response) => {
+          if (response.status >= 200 && response.status < 300) {
+            return Promise.resolve(response);
+          } else {
+            return Promise.reject(new Error(response.statusText));
           }
-        } else {
-          setMoreSongs(false);
-        }
-      })
-      .catch(function (error) {
-        console.log("Request failed", error);
-      });
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data._embedded) {
+            if (data._embedded.songList.length > 0) {
+              setSongs(songs.concat(data._embedded.songList));
+            }
+          } else {
+            setMoreSongs(false);
+          }
+        })
+        .catch(function (error) {
+          console.log("Request failed", error);
+        });
   }
 
   function onSubmit(value) {
@@ -167,6 +167,7 @@ function SongSearch(props) {
         next={loadMoreSongs}
         hasMore={moreSongs}
         loader={<div>Loading...</div>}
+        style={{ overflow: "inherit"}}
         endMessage={
           <p style={{ textAlign: "center" }}>
             <b>No more results</b>

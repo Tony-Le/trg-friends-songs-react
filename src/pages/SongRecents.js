@@ -119,6 +119,7 @@ function SongSearch(props) {
     <div>
       {loading ? <CircularProgress /> : <span></span>}
       <InfiniteScroll
+        style={{ overflow: "inherit" }}
         dataLength={songs.length}
         next={loadMoreSongs}
         hasMore={moreSongs}

@@ -34,11 +34,13 @@ function Home(props) {
       </p>
       <p>
         If you do not know what to search for try searching<span> </span>"
-        <a href="/search?query=pollyanna jazz">pollyanna jazz</a>"
+        <a href="/search?query=pollyanna jazz">pollyanna jazz</a>" or "
+        <a href="/search?query=polliana jazz">polliana jazz</a>" (typo
+        intended).
       </p>
       <div>
         *Note: The first search will take a minute or so to load as the back-end
-        server will require some time to wake up.
+        server will require some time to wake up due to server costs.
       </div>
       <p>
         View this project on{" "}

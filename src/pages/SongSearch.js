@@ -166,8 +166,8 @@ function SongSearch(props) {
         dataLength={songs.length}
         next={loadMoreSongs}
         hasMore={moreSongs}
-        loader={<div>Loading...</div>}
-        style={{ overflow: "inherit"}}
+        loader={<CircularProgress />}
+        style={{ overflow: "inherit" }}
         endMessage={
           <p style={{ textAlign: "center" }}>
             <b>No more results</b>

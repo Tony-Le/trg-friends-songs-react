@@ -17,17 +17,6 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 1,
     color: "#fff",
   },
-  fluidVideo: {
-    position: "absolute",
-    top: "0",
-    left: "0",
-    width: "100%",
-    height: "100%",
-  },
-  fluidVideoContainer: {
-    width: "1080px",
-    paddingTop: "56.25%", /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
-  },
 }));
 
 // Control the song search based on url query search parameter which then puts it into the the search field.
@@ -147,8 +136,12 @@ function SongSearch(props) {
 
   const songsRender = songs.map((song) => {
     return (
-      <Grid item md={4} sm={6}>
-        <SongCard key={song.id} song={song} onClick={onClickSongCard} />
+      <Grid item md={4} sm={6} xs={12}>
+        <SongCard
+          key={song.id}
+          song={song}
+          onClick={onClickSongCard}
+        />
       </Grid>
     );
   });
@@ -166,8 +159,8 @@ function SongSearch(props) {
         dataLength={songs.length}
         next={loadMoreSongs}
         hasMore={moreSongs}
-        loader={<CircularProgress />}
-        style={{ overflow: "inherit" }}
+        loader={<div>Loading...</div>}
+        style={{ overflow: "inherit"}}
         endMessage={
           <p style={{ textAlign: "center" }}>
             <b>No more results</b>

@@ -102,8 +102,12 @@ function SongSearch(props) {
 
   const songsRender = songs.map((song) => {
     return (
-      <Grid item md={4} sm={6}>
-        <SongCard key={song.id} song={song} onClick={onClickSongCard} />
+      <Grid item md={4} sm={6} xs={12}>
+        <SongCard
+          key={song.id}
+          song={song}
+          onClick={onClickSongCard}
+        />
       </Grid>
     );
   });
@@ -117,12 +121,13 @@ function SongSearch(props) {
 
   return (
     <div>
+      {loading ? <CircularProgress /> : <span></span>}
       <InfiniteScroll
         style={{ overflow: "inherit" }}
         dataLength={songs.length}
         next={loadMoreSongs}
         hasMore={moreSongs}
-        loader={<CircularProgress />}
+        loader={<div>Loading...</div>}
         endMessage={
           <p style={{ textAlign: "center" }}>
             <b>No more results</b>
@@ -139,17 +144,6 @@ function SongSearch(props) {
         videoId={selectedVideo}
         onReady={_onReady}
       />
-      {/* <Dialog
-        open={openVideoDialog}
-        maxWidth="xl"
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleClose}
-      >
-        <DialogContent>
-          <YouTube videoId={selectedVideo} opts={opts} onReady={_onReady} />
-        </DialogContent>
-      </Dialog> */}
     </div>
   );
 }

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {  Card, CardActionArea, CardMedia, CardContent, Typography, CardActions, Button } from "@material-ui/core";
+import React from "react";
+import {  Card, CardActionArea, CardMedia, CardContent, Typography } from "@material-ui/core";
 
 function SongSearch(props) {
 
@@ -15,7 +15,7 @@ function SongSearch(props) {
           image={"https://i.ytimg.com/vi/" + props.song.id + "/mqdefault.jpg"}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom noWrap={true}>
             {props.song.title}
           </Typography>
         </CardContent>

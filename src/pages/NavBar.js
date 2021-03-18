@@ -5,6 +5,7 @@ import {
   Paper,
   AppBar,
   Toolbar,
+  Hidden,
 } from "@material-ui/core";
 import { useHistory, useLocation, Link } from "react-router-dom";
 import SongSearchField from "./SongSearchField";
@@ -26,21 +27,29 @@ function NavBar(props) {
           <Toolbar>
             <Container>
               <Grid container justify="space-between">
-                <Grid item xs={3}>
-                  <Link to="/home">
+                <Hidden xsDown>
+                  <Grid item md={3} sm={6}>
+                    <Link to="/home">
+                      <img
+                        src="/Web Logo.png"
+                        alt="The Runaway Guys Logo"
+                        height="50px"
+                      ></img>
+                    </Link>
+                  </Grid>
+                </Hidden>
+                <Hidden smUp>
+                  <Grid item xs={2}>
+                    <Link to="/home">
                       <img
                         src="/TRG Logo.jpg"
                         alt="The Runaway Guys Logo"
-                        height="40px"
+                        height="50px"
                       ></img>
-                      <img
-                        src="/developed-with-youtube-sentence-case-light.png"
-                        alt="The Runaway Guys Logo"
-                        height="40px"
-                      ></img>
-                  </Link>
-                </Grid>
-                <Grid container item justify="center" xs={6}>
+                    </Link>
+                  </Grid>
+                </Hidden>
+                <Grid container item justify="center" md={6} sm={6} xs={10}>
                   <SongSearchField
                     onSubmit={onSubmit}
                     defaultValue={

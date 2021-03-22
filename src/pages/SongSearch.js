@@ -1,22 +1,13 @@
 import React, { useEffect, useState } from "react";
-import {
-  Grid,
-  CircularProgress,
-  Backdrop,
-} from "@material-ui/core";
-import Slide from "@material-ui/core/Slide";
+import { Grid, CircularProgress, Toolbar } from "@material-ui/core";
 import SongCard from "./SongCard";
-import { useHistory, useLocation, Link } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import VideoDialog from "./VideoDialog";
 import { makeStyles } from "@material-ui/core/styles";
 const queryString = require("query-string");
 
 const useStyles = makeStyles((theme) => ({
-  backdrop: {
-    zIndex: theme.zIndex.drawer + 1,
-    color: "#fff",
-  },
 }));
 
 // Control the song search based on url query search parameter which then puts it into the the search field.
@@ -32,7 +23,6 @@ function SongSearch(props) {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [openVideoDialog, setOpenVideoDialog] = useState(false);
   const [playerRef, setPlayerRef] = useState(null);
-  const [openBackDrop, setOpenBackDrop] = React.useState(false);
   const history = useHistory();
   const location = useLocation();
   
@@ -43,7 +33,6 @@ function SongSearch(props) {
   }, [location]);
 
   useEffect(() => {
-    setOpenBackDrop(true);
     const url =
       "https://trg-friends-songs-api.herokuapp.com/songs/api/search?query=";
     setPageNumber(0);
@@ -66,11 +55,9 @@ function SongSearch(props) {
            // no songs found
            setSongs([]);
          }
-        setOpenBackDrop(false);
       })
       .catch(function (error) {
         console.log("Request failed", error);
-        setOpenBackDrop(false);
       });
   }, [query]);
 
@@ -155,12 +142,17 @@ function SongSearch(props) {
 
   return (
     <div>
+      <Toolbar />
       <InfiniteScroll
         dataLength={songs.length}
         next={loadMoreSongs}
         hasMore={moreSongs}
-        loader={<div>Loading...</div>}
-        style={{ overflow: "inherit"}}
+        loader={
+          <Grid container justify="center">
+            <CircularProgress />
+          </Grid>
+        }
+        style={{ overflow: "inherit" }}
         endMessage={
           <p style={{ textAlign: "center" }}>
             <b>No more results</b>
@@ -168,9 +160,6 @@ function SongSearch(props) {
         }
       >
         <Grid container spacing={3}>
-          <Backdrop className={classes.backdrop} open={openBackDrop}>
-            <CircularProgress color="inherit" />
-          </Backdrop>
           {songsRender}
         </Grid>
       </InfiniteScroll>
